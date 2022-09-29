@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+tr.table-body:hover {
+  background-color: rgb(240, 232, 232);
+  cursor: pointer;
+}
+
+th, td {
+  min-width: 5rem;
+}
