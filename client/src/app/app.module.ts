@@ -8,6 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { HeaderComponent } from './components/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { HeaderComponent } from './components/header/header.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from "@angular/material/table";
+import { ContactsService } from 'src/app/services/contacts.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -265,11 +266,13 @@ export class ContactListComponent implements OnInit {
   displayedColumns: string[] = ['slNo', 'name', 'phone', 'email'];
   dataSource = new MatTableDataSource(this.contacts)
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private contactServices: ContactsService
+  ) { }
 
   ngOnInit(): void {
   }
-
 
   viewContact(row: any) {
     console.log(row);
@@ -278,6 +281,22 @@ export class ContactListComponent implements OnInit {
   search(text: any) {
     console.log(text.value);
     this.dataSource.filter = text.value.trim().toLowerCase();
+  }
+
+  uploadContactsJson(e: any) {
+    var file = e.target.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = (event: any)=> {
+        this.contactServices.uploadContacts((JSON.parse(event.target.result)));
+      }
+      reader.onerror = (event: any)=> {
+        console.log('error reading file');
+      }
+    } else {
+      alert('No file found. Try again')
+    }
   }
 
 }
