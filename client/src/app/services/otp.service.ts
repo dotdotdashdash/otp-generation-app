@@ -27,4 +27,8 @@ export class OtpService {
     return this.http.post(`${server}/contacts/sendmessage`, data)
   }
 
+  getMessages() {
+    return this.http.get(`${server}/messages/getmessages`);
+  }
+
 }

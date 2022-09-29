@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from "@angular/material/table";
+import { OtpService } from 'src/app/services/otp.service';
 
 @Component({
   selector: 'app-messages-list',
@@ -9,12 +11,23 @@ export class MessagesListComponent implements OnInit {
 
   messages: any = [ ];
   dataSource: any;
-  displayedColumns: string[] = ['slNo', 'Time', 'phone', 'OTP'];
+  displayedColumns: string[] = ['name', 'time', 'phone', 'otp'];
 
-  constructor() { }
+  constructor( private _otpServices: OtpService ) { }
 
   ngOnInit(): void {
-    
+    this._otpServices.getMessages()
+      .subscribe({
+        next: (responseData: any)=> {
+          console.log(responseData);
+          this.messages = responseData.data;
+          this.dataSource = new MatTableDataSource(this.messages);
+
+        },
+        error: (errorData: any)=> {
+          console.log(errorData);
+        }
+      });
   }
 
   search(text: any) {

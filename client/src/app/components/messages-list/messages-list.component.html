@@ -19,10 +19,10 @@
     <div class="col-10 table-responsive">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mb-3 ">
 
-        <!-- Serial Number Column -->
-        <ng-container matColumnDef="slNo">
-          <th mat-header-cell *matHeaderCellDef> # </th>
-          <td mat-cell *matCellDef="let element; let i = index"> {{ i+1 }} </td>
+        <!-- Time Column -->
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> Time </th>
+          <td mat-cell *matCellDef="let element"> {{element.communicationInfo.otpMessages.sentTime | date: 'short'}} </td>
         </ng-container>
 
         <!-- Name Column -->
@@ -32,15 +32,15 @@
         </ng-container>
       
         <!-- Email Column -->
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-      
-        <!-- Phone Column -->
         <ng-container matColumnDef="phone">
           <th mat-header-cell *matHeaderCellDef> Phone </th>
           <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+        </ng-container>
+      
+        <!-- Phone Column -->
+        <ng-container matColumnDef="otp">
+          <th mat-header-cell *matHeaderCellDef> OTP </th>
+          <td mat-cell *matCellDef="let element"> {{element.communicationInfo.otpMessages.otp}} </td>
         </ng-container>
       
         <tr class="table-header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -40,7 +40,7 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   openBottomSheet(): void {
-    let min = Math.ceil(0);
+    let min = Math.ceil(100000);
     let max = Math.floor(999999);
     var otp = Math.floor(Math.random() * (max - min) + min);
     this._bottomSheet.open(ComposeMessageSheet, { // injecting the data to be displayed in the bottom sheet
