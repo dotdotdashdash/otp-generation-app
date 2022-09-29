@@ -1,0 +1,14 @@
+<div class="container h-50">
+  <div class="row d-flex justify-content-around h-100">
+    <div class="col-11 col-sm-8 align-self-center ">
+      <mat-card>
+        <mat-card-title> {{contact.firstName}} {{contact.lastName}}</mat-card-title>
+        <mat-card-subtitle>{{contact.email}}</mat-card-subtitle>
+        <mat-card-subtitle>{{contact.phone}}</mat-card-subtitle>
+        <mat-card-actions align="end">
+          <button (click)="openBottomSheet()" mat-stroked-button color="primary">Send Message</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

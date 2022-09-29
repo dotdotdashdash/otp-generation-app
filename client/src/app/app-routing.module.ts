@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { ContactDetailsComponent } from './components/contact-details/contact-details.component';
+import { ContactsListComponent } from './components/contacts-list/contacts-list.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MessagesListComponent } from './components/messages-list/messages-list.component';
 
 const routes: Routes = [
   {
@@ -10,7 +12,15 @@ const routes: Routes = [
   },
   {
     path: 'contacts',
-    component: ContactListComponent
+    component: ContactsListComponent
+  },
+  {
+    path: 'viewcontact',
+    component: ContactDetailsComponent
+  },
+  {
+    path: 'messages',
+    component: MessagesListComponent
   }
 ];
 

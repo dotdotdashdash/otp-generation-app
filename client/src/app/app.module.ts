@@ -6,24 +6,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { ContactsListComponent } from './components/contacts-list/contacts-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ComposeMessageSheet, ContactDetailsComponent, DialogElement } from './components/contact-details/contact-details.component';
+import { FormsModule } from '@angular/forms';
+import { MessagesListComponent } from './components/messages-list/messages-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    ContactListComponent,
+    ContactsListComponent,
     HeaderComponent,
+    ContactDetailsComponent,
+    ComposeMessageSheet,
+    DialogElement,
+    MessagesListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

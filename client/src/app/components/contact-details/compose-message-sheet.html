@@ -1,0 +1,23 @@
+<div class="container">
+  <br>
+  <mat-card class="example-card">
+    <mat-card-subtitle>{{data.phone}}</mat-card-subtitle>
+    <mat-card-title>{{data.name}}</mat-card-title>
+    <mat-card-content>
+      <p>Confirm to send this message with OTP to {{data.name}}. Click <span style="cursor: pointer; text-decoration: underline;" (click)="toggleTextAreaStatus()">here</span> if you're sure about editing the content.</p>
+      <p>
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Message Content</mat-label>
+          <textarea [disabled]="textAreaStatus" [(ngModel)] = "data.messageContent" rows="4" matInput></textarea>
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+      <button (click)="sendOtpMessage(data)" mat-raised-button color="primary">Send Message</button>
+      <button (click)="openLink($event)" mat-raised-button color="warn">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
+  <br>
+</div>
