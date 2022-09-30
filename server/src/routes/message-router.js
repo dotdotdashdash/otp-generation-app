@@ -23,7 +23,6 @@ messageRouter.get(`/getmessages`, (req, res)=> {
     }
   ])
     .then((responseData)=> {
-      console.log(responseData);
       res.status(200).json({
         success: true,
         data: responseData
