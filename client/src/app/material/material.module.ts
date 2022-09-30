@@ -12,6 +12,8 @@ import { MatListModule } from "@angular/material/list";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from "@angular/material/dialog";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
 
 const MaterialComponents = [
   MatButtonModule,
@@ -26,7 +28,9 @@ const MaterialComponents = [
   MatListModule,
   MatSidenavModule,
   MatProgressBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatPaginatorModule,
+  MatSortModule
 ]
 
 @NgModule({

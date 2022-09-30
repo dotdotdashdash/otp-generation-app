@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from "@angular/material/table";
 import { OtpService } from 'src/app/services/otp.service';
@@ -8,12 +9,23 @@ import { OtpService } from 'src/app/services/otp.service';
   templateUrl: './contacts-list.component.html',
   styleUrls: ['./contacts-list.component.css']
 })
-export class ContactsListComponent implements OnInit {
+export class ContactsListComponent implements OnInit, AfterViewInit {
 
   contacts: any = [ ];
   dataSource: any;
 
-  displayedColumns: string[] = ['slNo', 'name', 'phone', 'email'];
+  @ViewChild(MatPaginator, {static: false})
+  set paginator(value: MatPaginator) {
+    if (this.dataSource){
+      this.dataSource.paginator = value;
+    }
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  displayedColumns: string[] = ['name', 'phone', 'email'];
 
   constructor(
     private _router: Router,
