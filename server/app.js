@@ -1,4 +1,5 @@
 require('dotenv/config');
+const path = require('path');
 const express = require(`express`);
 const cors = require(`cors`);
 const mongoose = require('mongoose');
@@ -23,9 +24,14 @@ mongoose.connect(MONGODB_URI, {
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, './dist/client')));
 
 app.use(`/api/contacts`, contactsRouter);
 app.use(`/api/messages`, messageRouter);
+
+app.get('/*', (req, res)=> {
+  res.sendFile(path.join(__dirname, './dist/client/index.html'));
+});
 
 process.stdin.resume();//so the program will not close instantly
 

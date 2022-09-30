@@ -9,7 +9,7 @@ import { OtpService } from 'src/app/services/otp.service';
   templateUrl: './contacts-list.component.html',
   styleUrls: ['./contacts-list.component.css']
 })
-export class ContactsListComponent implements OnInit, AfterViewInit {
+export class ContactsListComponent implements OnInit{
 
   contacts: any = [ ];
   dataSource: any;
@@ -19,10 +19,6 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
     if (this.dataSource){
       this.dataSource.paginator = value;
     }
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   displayedColumns: string[] = ['name', 'phone', 'email'];

@@ -4,7 +4,6 @@ const contactModel = require("../models/contact-model");
 const messageRouter = express.Router();
 
 messageRouter.get(`/getmessages`, (req, res)=> {
-  console.log('re');
 
   contactModel.aggregate([
     {

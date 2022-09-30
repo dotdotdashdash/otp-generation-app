@@ -9,7 +9,7 @@ import { OtpService } from 'src/app/services/otp.service';
   templateUrl: './messages-list.component.html',
   styleUrls: ['./messages-list.component.css']
 })
-export class MessagesListComponent implements OnInit, AfterViewInit {
+export class MessagesListComponent implements OnInit{
 
   messages: any = [ ];
   dataSource: any;
@@ -29,18 +29,12 @@ export class MessagesListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-
   constructor( private _otpServices: OtpService ) { }
 
   ngOnInit(): void {
     this._otpServices.getMessages()
       .subscribe({
         next: (responseData: any)=> {
-          console.log(responseData);
           this.messages = responseData.data;
           this.dataSource = new MatTableDataSource(this.messages);
 

@@ -66,7 +66,7 @@ contactsRouter.post(`/sendmessage`, async (req, res)=> {
   let messageSentStatus = await sendSms(req.body.phone, req.body.messageContent); // Pass the data to sendSms function and await for the response from twilio
 
   if(!messageSentStatus.success) { // If message sending failed, notify client
-    console.log(`Sending Message Failed-->`, messageSentStatus.data.message)
+    console.log(`Sending Message Failed-->`, messageSentStatus.data)
     res.status(400).json(messageSentStatus)
   } else {
     updateSentOtpInfo(req.body, messageSentStatus) // Push the message receiver data nd message send status to db
