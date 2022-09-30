@@ -14,6 +14,10 @@ export class OtpService {
     return this.http.post(`${environment.server}/contacts/insertcontacts`, contactsArray);
   }
 
+  uploadContact( contact: Object) {
+    return this.http.post(`${environment.server}/contacts/addcontact`, contact);
+  }
+
   getContacts() {
     return this.http.get(`${environment.server}/contacts/getcontacts`);
   }

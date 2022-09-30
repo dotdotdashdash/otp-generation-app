@@ -3,6 +3,9 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-shee
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { OtpService } from 'src/app/services/otp.service';
 
 // main component to display the contact details
@@ -16,9 +19,14 @@ export class ContactDetailsComponent implements OnInit {
   contact: any = { };
   contactId: any;
 
+  messages: any = [ ];
+  dataSource: any;
+  displayedColumns: string[] = ['time', 'messageBody'];
+
   constructor( 
     private _otpServices: OtpService,
-    private _bottomSheet: MatBottomSheet 
+    private _bottomSheet: MatBottomSheet,
+    private _title: Title
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +36,10 @@ export class ContactDetailsComponent implements OnInit {
         next: (responseData: any)=> {
           if(responseData.success) {
             this.contact = responseData.data;
+            console.log(this.contact.communicationInfo.otpMessages);
+            this.messages = this.contact.communicationInfo.otpMessages;
+            this.dataSource = new MatTableDataSource(this.messages);
+            this._title.setTitle(`${this.contact.firstName} ${this.contact.lastName}: Contact Details: OTP generation app: Kisan Network`)
           } else {
             alert('Failed getting contact details');
           }
@@ -43,7 +55,7 @@ export class ContactDetailsComponent implements OnInit {
     let min = Math.ceil(100000);
     let max = Math.floor(999999);
     var otp = Math.floor(Math.random() * (max - min) + min);
-    this._bottomSheet.open(ComposeMessageSheet, { // injecting the data to be displayed in the bottom sheet
+    const sheetRef = this._bottomSheet.open(ComposeMessageSheet, { // injecting the data to be displayed in the bottom sheet
       data: {
         contactId: this.contactId,
         name: `${this.contact.firstName} ${this.contact.lastName}`,
@@ -70,6 +82,7 @@ export class ComposeMessageSheet {
   constructor( 
     private _bottomSheetRef: MatBottomSheetRef<ComposeMessageSheet>,
     private _otpServices: OtpService,
+    private _router: Router,
     @Inject(MAT_BOTTOM_SHEET_DATA) 
     public data: { 
       name: string,
@@ -97,24 +110,35 @@ export class ComposeMessageSheet {
         next: (responseData: any)=> {
           if(responseData.success) {
             this.openDialog(`OTP Successfully Sent`, `Done`)
+            this._bottomSheetRef.dismiss();
           } else {
-            this.openDialog(`OTP Sending Failed`, `Failed`)
+            this.openDialog(`OTP Sending Failed`, `Failed`);
+            this._bottomSheetRef.dismiss();
           }
         },
         error: (errorData: any)=> {
           console.log(errorData);
-          this.openDialog(`OTP Sending Failed`, `Failed`)
+          this.openDialog(`OTP Sending Failed`, `Failed`);
+          this._bottomSheetRef.dismiss();
         }
       });
   }
 
   openDialog(message: any, status: any) {
     this.waiting = false; //hide indeterminated progress bar
-    this.dialog.open(DialogElement, {
+    const dialogRef = this.dialog.open(DialogElement, {
       data: {
         message: message,
         status: status
       }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const currentRoute = this._router.url; // function to reload the current component
+      this._router.navigateByUrl('/', { skipLocationChange: true })
+        .then(() => {
+          this._router.navigate([currentRoute]); // navigate to same route
+        }); 
     });
   }
 

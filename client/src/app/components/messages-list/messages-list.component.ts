@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from "@angular/material/sort";
 import { OtpService } from 'src/app/services/otp.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-messages-list',
@@ -29,7 +30,12 @@ export class MessagesListComponent implements OnInit{
     }
   }
 
-  constructor( private _otpServices: OtpService ) { }
+  constructor( 
+    private _otpServices: OtpService,
+    private _title: Title
+  ) {
+    this._title.setTitle('All Messages: OTP generation app: Kisan Network')
+  }
 
   ngOnInit(): void {
     this._otpServices.getMessages()

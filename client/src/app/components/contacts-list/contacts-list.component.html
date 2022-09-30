@@ -19,7 +19,7 @@
       <input (change)="uploadContactsJson($event)"hidden type="file" accept=".json" #file>  <!-- hidden field to be triggered on clicking import json menu button -->
       <mat-menu #addContactMenu="matMenu" xPosition="after">
         <button (click)="file.click()" mat-menu-item><mat-icon>file_download</mat-icon> Import JSON</button>
-        <button mat-menu-item><mat-icon>drive_file_rename_outline</mat-icon>Add manually</button>
+        <button (click)="openDialog()" mat-menu-item><mat-icon>drive_file_rename_outline</mat-icon>Add manually</button>
       </mat-menu>
     </div> <!-- Add contact menu and submenu -->
 
@@ -59,7 +59,8 @@
         showFirstLastButtons 
         aria-label="Select page of periodic elements">
       </mat-paginator>
-    </div>
+      <br>
+  </div>
   </div> <!-- Contacts list -->
 
 </div>

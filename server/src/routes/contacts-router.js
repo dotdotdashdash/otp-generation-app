@@ -26,6 +26,26 @@ contactsRouter.post(`/insertcontacts`, (req, res)=> {
 
 });
 
+contactsRouter.post(`/addcontact`, (req, res)=> {
+  req.body.phone = '+91' + req.body.phone;
+
+  let newContact = new contactModel(req.body);
+
+  newContact.save()
+    .then((responseData)=> {
+      res.status(200).json({
+        success: true,
+        message: `New contact added successfully`
+      });
+    })
+    .catch((errorData=> {
+      res.status(500).json({
+        success: false,
+        message: `New contact addition failed`
+      });
+    }));
+});
+
 contactsRouter.get(`/getcontacts`, (req, res)=> {
   
   contactModel.find({ })

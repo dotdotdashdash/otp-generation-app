@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from "@angular/material/table";
 import { OtpService } from 'src/app/services/otp.service';
+import { Title } from '@angular/platform-browser';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-contacts-list',
@@ -25,8 +27,12 @@ export class ContactsListComponent implements OnInit{
 
   constructor(
     private _router: Router,
-    private _otpServices: OtpService
-  ) { }
+    private _otpServices: OtpService,
+    public dialog: MatDialog,
+    private _title: Title
+  ) {
+    this._title.setTitle('Contacts: OTP generation app: Kisan Network')
+  }
 
   ngOnInit(): void {
     this._otpServices.getContacts()
@@ -86,4 +92,54 @@ export class ContactsListComponent implements OnInit{
     }
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddContactDialog, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const currentRoute = this._router.url; // function to reload the current component
+      this._router.navigateByUrl('/', { skipLocationChange: true })
+        .then(() => {
+          this._router.navigate([currentRoute]); // navigate to same route
+        }); 
+    });
+  }
+
+}
+
+@Component({
+  selector: 'add-contact-dialog',
+  templateUrl: 'add-contact-dialog.html',
+})
+export class AddContactDialog {
+  contact: any = { }
+
+  constructor(
+    public dialogRef: MatDialogRef<AddContactDialog>,
+    private _otpServices: OtpService
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
+
+  addNewContact() {
+    this._otpServices.uploadContact(this.contact)
+      .subscribe({
+        next: (responseData: any)=> {
+          alert(`New contact added succesfuly`);
+          this.dialogRef.close();
+
+        },
+        error: (errorData: any)=> {
+          console.log(errorData);
+          
+        }
+      });
+  }
 }

@@ -7,7 +7,7 @@ messageRouter.get(`/getmessages`, (req, res)=> {
 
   contactModel.aggregate([
     {
-      $match : { "communicationInfo.otpMessages": { $exists: true }}
+      $match : { "communicationInfo.otpMessages": { $exists: true , $ne: [] }}
     },
     {
       $project: {
@@ -18,7 +18,7 @@ messageRouter.get(`/getmessages`, (req, res)=> {
       }
     },
     {
-      $unwind: "$communicationInfo"
+      $unwind: "$communicationInfo.otpMessages"
     }
   ])
     .then((responseData)=> {

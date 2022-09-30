@@ -1,0 +1,64 @@
+<div class="example-container"  >
+  <form #addContactForm="ngForm">
+
+    <mat-form-field appearance="fill"  class="w-100">
+      <mat-label>Enter First Name</mat-label>
+      <input 
+        name="firstName"
+        matInput 
+        #firstName="ngModel" 
+        [(ngModel)]="contact.firstName" 
+        required
+      >
+      <mat-error *ngIf="firstName.invalid">First Name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Enter Last Name</mat-label>
+      <input 
+        name="lastName" 
+        matInput 
+        #lastName="ngModel" 
+        [(ngModel)]="contact.lastName" 
+      >
+    </mat-form-field>
+
+    <mat-form-field class="w-100" appearance="fill">
+      <mat-label>Telephone</mat-label>
+      <span matPrefix>+91 &nbsp;</span>
+      <input 
+        name="phone" 
+        #phone="ngModel"  
+        [(ngModel)]="contact.phone" 
+        type="tel" 
+        matInput 
+        placeholder="555-555-1234"
+        required
+        pattern="^\d{3}[\.\-\s]?\d{3}[\.\-\s]?\d{4}$"
+      >
+      <mat-error *ngIf="phone.invalid">Enter a valid 10 digit number</mat-error>
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 my-2" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input 
+        required 
+        name="email" 
+        #email="ngModel" 
+        type="email" 
+        matInput 
+        [(ngModel)]="contact.email" 
+        placeholder="Ex. pat@example.com"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+      >
+      <mat-error *ngIf="email.invalid">
+        Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+
+    <button [disabled]="addContactForm.invalid" class="me-1" (click)="addNewContact()" mat-raised-button color="primary">Add contact</button>
+    <button class="mx-1" (click)="closeDialog()" mat-raised-button color="warn">Cancel</button>
+
+  </form>
+</div>

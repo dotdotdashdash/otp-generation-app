@@ -38,7 +38,7 @@ module.exports.updateSentOtpInfo = async (contactData, messageStatus)=> {
   
   return await contactModel.findByIdAndUpdate(contactData.contactId, {
     $push: {
-      communicationInfo: { otpMessages: message }
+      'communicationInfo.otpMessages': message
     }
   }, { new: true })
   .then((responseData)=> {

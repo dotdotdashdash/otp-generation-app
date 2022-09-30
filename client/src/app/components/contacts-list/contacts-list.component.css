@@ -10,7 +10,3 @@ tr.table-body:hover {
 th, td {
   min-width: 5rem;
 }
-
-.mat-column-email, .mat-column-phone {
-  text-align: center;
-}

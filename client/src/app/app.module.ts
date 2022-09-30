@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ContactsListComponent } from './components/contacts-list/contacts-list.component';
+import { AddContactDialog, ContactsListComponent } from './components/contacts-list/contacts-list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ComposeMessageSheet, ContactDetailsComponent, DialogElement } from './components/contact-details/contact-details.component';
@@ -23,7 +23,8 @@ import { MessagesListComponent } from './components/messages-list/messages-list.
     ContactDetailsComponent,
     ComposeMessageSheet,
     DialogElement,
-    MessagesListComponent
+    MessagesListComponent,
+    AddContactDialog
   ],
   imports: [
     BrowserModule,
