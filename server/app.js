@@ -33,14 +33,6 @@ app.get('/*', (req, res)=> {
   res.sendFile(path.join(__dirname, './dist/client/index.html'));
 });
 
-process.stdin.resume();//so the program will not close instantly
-
-function exitHandler(options, exitCode) {
-    if (options.cleanup) console.log('clean');
-    if (exitCode || exitCode === 0) console.log(exitCode);
-    if (options.exit) process.exit();
-}
-
 app.listen(PORT, ()=> {
   console.log(`Hi, I'm listening at ${PORT}`);
 });
