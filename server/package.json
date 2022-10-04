@@ -1,5 +1,5 @@
 {
-  "name": "server-kisannetwork-sms-otp",
+  "name": "sms-otp",
   "version": "1.0.0",
   "description": "A full stack web app to store and send otp sms's to saved contact numbers",
   "main": "app.js",
