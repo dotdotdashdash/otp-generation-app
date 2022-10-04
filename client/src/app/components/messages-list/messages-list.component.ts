@@ -34,7 +34,7 @@ export class MessagesListComponent implements OnInit{
     private _otpServices: OtpService,
     private _title: Title
   ) {
-    this._title.setTitle('All Messages: OTP generation app: Kisan Network')
+    this._title.setTitle('All Messages: OTP generation app')
   }
 
   ngOnInit(): void {

@@ -31,7 +31,7 @@ export class ContactsListComponent implements OnInit{
     public dialog: MatDialog,
     private _title: Title
   ) {
-    this._title.setTitle('Contacts: OTP generation app: Kisan Network')
+    this._title.setTitle('Contacts: OTP generation app')
   }
 
   ngOnInit(): void {

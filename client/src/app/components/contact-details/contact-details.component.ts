@@ -39,7 +39,7 @@ export class ContactDetailsComponent implements OnInit {
             console.log(this.contact.communicationInfo.otpMessages);
             this.messages = this.contact.communicationInfo.otpMessages;
             this.dataSource = new MatTableDataSource(this.messages);
-            this._title.setTitle(`${this.contact.firstName} ${this.contact.lastName}: Contact Details: OTP generation app: Kisan Network`)
+            this._title.setTitle(`${this.contact.firstName} ${this.contact.lastName}: Contact Details: OTP generation app`)
           } else {
             alert('Failed getting contact details');
           }

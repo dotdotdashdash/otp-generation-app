@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 export class DashboardComponent {
 
   constructor( private _title: Title ) {
-    this._title.setTitle('Home: OTP generation app: Kisan Network')
+    this._title.setTitle('Home: OTP generation app')
   }
 
 }
